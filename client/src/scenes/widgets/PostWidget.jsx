@@ -38,7 +38,7 @@ const PostWidget = ({
   const primary = palette.primary.main;
 
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+    const response = await fetch(`http://3.132.138.14:3001/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -61,7 +61,7 @@ const PostWidget = ({
 
   const handleCommentSubmit = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/posts/${postId}/comment`, {
+      const response = await fetch(`http://3.132.138.14:3001/posts/${postId}/comment`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -84,7 +84,7 @@ const PostWidget = ({
 
   const handleConfirmDelete = async () => {
     try {
-      await fetch(`http://localhost:3001/posts/${postId}`, {
+      await fetch(`http://3.132.138.14:3001/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
