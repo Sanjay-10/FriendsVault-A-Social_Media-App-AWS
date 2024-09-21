@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-    Box, 
+    Box,
     Button,
     TextField,
     useMediaQuery,
@@ -26,7 +26,7 @@ const registerSchema = yup.object().shape({
     password: yup.string().required("Required").min(5),
     location: yup.string().required("Required"),
     occupation: yup.string().required("Required"),
-    picture: yup.string().required("Required"),
+    picture: yup.mixed().required("Required"), // picture validation
 });
 
 const loginSchema = yup.object().shape({
@@ -41,7 +41,7 @@ const initialValuesRegister = {
     password: "",
     location: "",
     occupation: "",
-    picture: "",
+    picture: null,  // Initialize picture as null
 };
 
 const initialValuesLogin = {
@@ -50,9 +50,11 @@ const initialValuesLogin = {
 };
 
 const Form = () => {
-    const [severity, setSeverity] = useState("error")
+    const [imagePreview, setImagePreview] = useState(null); // For image preview
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [severity, setSeverity] = useState("error");
     const [open, setOpen] = useState(false);
-    const [message, setMessage] = useState(""); // For storing the alert message
+    const [message, setMessage] = useState("");
     const [pageType, setPageType] = useState("login");
     const [loading, setLoading] = useState(false);
     const { palette } = useTheme();
@@ -69,7 +71,7 @@ const Form = () => {
             formData.append(value, values[value]);
         }
         formData.append('picturePath', values.picture.name);
-    
+
         try {
             const savedUserResponse = await fetch(
                 "http://localhost:3001/auth/register",
@@ -78,34 +80,28 @@ const Form = () => {
                     body: formData,
                 }
             );
-    
+
             const savedUser = await savedUserResponse.json();
-            console.log("savedUser", savedUser)
             if (savedUser.error) {
-                
                 setMessage("Registration failed. Please try again.");
-                setOpen(true); 
-                setSeverity("error")
-              
+                setOpen(true);
+                setSeverity("error");
             } else {
-                
-                onSubmitProps.resetForm(); 
+                onSubmitProps.resetForm();
                 setPageType("login");
-                setMessage("Registration successful! Please log in."); 
-                setOpen(true); 
-                setSeverity("success")
-             
+                setMessage("Registration successful! Please log in.");
+                setOpen(true);
+                setSeverity("success");
             }
             setLoading(false);
-    
+
         } catch (error) {
             console.error(error);
             setLoading(false);
-            setMessage("Registration failed. Please try again."); 
+            setMessage("Registration failed. Please try again.");
             setOpen(true);
         }
     };
-    
 
     const login = async (values, onSubmitProps) => {
         setLoading(true);
@@ -124,10 +120,9 @@ const Form = () => {
             onSubmitProps.resetForm();
 
             if (loggedIn.msg) {
-                setMessage("Login failed. Please check your credentials."); 
-                setSeverity("error")
-                setOpen(true); 
-
+                setMessage("Login failed. Please check your credentials.");
+                setSeverity("error");
+                setOpen(true);
             } else {
                 dispatch(
                     setLogin({
@@ -140,13 +135,11 @@ const Form = () => {
         } catch (error) {
             console.error(error);
             setLoading(false);
-            setMessage("Login failed. Please try again."); 
-            setSeverity("error")
-            setOpen(true); 
+            setMessage("Login failed. Please try again.");
+            setSeverity("error");
+            setOpen(true);
         }
     };
-
-   
 
     const handleFormSubmit = async (values, onSubmitProps) => {
         if (isLogin) await login(values, onSubmitProps);
@@ -158,6 +151,27 @@ const Form = () => {
             return;
         }
         setOpen(false);
+    };
+
+    const handleDrop = (acceptedFiles, setFieldValue) => {
+        const validTypes = [
+            'image/jpeg',
+            'image/png',
+            'image/jpg',
+            'image/heic',
+            'image/gif'
+        ];
+        const file = acceptedFiles[0];
+        if (file && validTypes.includes(file.type)) {
+            setFieldValue("picture", file);  // Set the file in Formik
+            setImagePreview(URL.createObjectURL(file));  // Generate image preview
+        } else {
+            setSnackbarOpen(true);  // Show Snackbar for invalid file type
+        }
+    };
+
+    const handleCloseSnackbar = () => {
+        setSnackbarOpen(false);
     };
 
     return (
@@ -235,11 +249,9 @@ const Form = () => {
                                     p="1rem"
                                 >
                                     <Dropzone
-                                        acceptedFiles=".jpg,.jpeg,.png"
+                                        accept="image/jpeg, image/png, image/gif"
                                         multiple={false}
-                                        onDrop={(acceptedFiles) =>
-                                            setFieldValue("picture", acceptedFiles[0])
-                                        }
+                                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, setFieldValue)}
                                     >
                                         {({ getRootProps, getInputProps }) => (
                                             <Box
@@ -260,6 +272,17 @@ const Form = () => {
                                             </Box>
                                         )}
                                     </Dropzone>
+
+                                    {/* Image Preview */}
+                                    {imagePreview && (
+                                        <Box mt={2} textAlign="center">
+                                            <img
+                                                src={imagePreview}
+                                                alt="Preview"
+                                                style={{ maxWidth: "100%", height: "auto" }}
+                                            />
+                                        </Box>
+                                    )}
                                 </Box>
                             </>
                         )}
@@ -274,7 +297,6 @@ const Form = () => {
                             helperText={touched.email && errors.email}
                             sx={{ gridColumn: "span 4" }}
                         />
-
                         <TextField
                             label="Password"
                             type="password"
@@ -288,54 +310,68 @@ const Form = () => {
                         />
                     </Box>
 
-                    {/* BUTTONS */}
-                    <Box>
-                        <Button
-                            fullWidth
-                            disabled={loading}
-                            type="submit"
-                            sx={{
-                                m: "2rem 0 0 0",
-                                p: "1rem",
-                                backgroundColor: palette.primary.main,
-                                color: palette.background.alt,
-                                "&:hover": {
-                                    color: palette.primary.main,
-                                    backgroundColor: palette.primary.light
-                                },
-                            }}
-                        >
-                            {isLogin ? "LOGIN" : "REGISTER"}
-                        </Button>
-                        {loading && <LinearProgress color="success" />}
-                        <Typography
-                            onClick={() => {
-                                setPageType(isLogin ? "register" : "login");
-                                resetForm();
-                            }}
-                            sx={{
-                                mt: "2rem ",
-                                textDecoration: "underline",
-                                color: palette.primary.main,
-                                "&:hover": {
-                                    cursor: "pointer",
-                                    color: palette.primary.light,
-                                }
-                            }}
-                        >
-                            {isLogin ? "Don't have an account? Sign Up here."
-                                : "Already have an account? Login here."}
-                        </Typography>
-                    </Box>
+                    {/* Submit Button */}
+                    <Button
+                        fullWidth
+                        disabled={loading}
+                        type="submit"
+                        sx={{
+                            m: "2rem 0 0 0",
+                            p: "1rem",
+                            backgroundColor: palette.primary.main,
+                            color: palette.background.alt,
+                            "&:hover": { fontWeight:"bold",
+                                backgroundColor: "#04AA6D",
 
-                    <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={4000} onClose={handleClose}>
-                        <Alert
-                            onClose={handleClose}
-                            severity= {severity}
-                            variant="filled"
-                            sx={{ width: '100%' }}
-                        >
+                             },
+                        }}
+                    >
+                        {isLogin ? "LOGIN" : "REGISTER"}
+                    </Button>
+                    {loading && <LinearProgress color="success" />}
+
+                    <Typography
+                    m="2rem 0 0 0"
+                        onClick={() => {
+                            setPageType(isLogin ? "register" : "login");
+                            resetForm();
+                        }}
+                        sx={{
+                            textDecoration: "underline",
+                            color: palette.primary.main,
+                            "&:hover": {
+                                cursor: "pointer",
+                                color: palette.primary.light,
+                            },
+                        }}
+                    >
+                        
+                        {isLogin 
+                            ? "Don't have an account? Sign Up here."
+                            : "Already have an account? Login here."}
+                    </Typography>
+
+                    {/* Snackbar for notifications */}
+                    <Snackbar
+                        open={open}
+                        autoHideDuration={3000}
+                        onClose={handleClose}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    >
+                        <Alert onClose={handleClose} severity={severity} sx={{fontSize:"15px", width: '100%' }}>
                             {message}
+                        </Alert>
+                    </Snackbar>
+
+                    {/* Snackbar for file type validation */}
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={3000}
+                        onClose={handleCloseSnackbar}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    >
+                        <Alert onClose={handleCloseSnackbar} severity="error" sx={{ fontSize:"15px", width: '100%' }}>
+                            Invalid file type! Please select a valid image file.
                         </Alert>
                     </Snackbar>
                 </form>

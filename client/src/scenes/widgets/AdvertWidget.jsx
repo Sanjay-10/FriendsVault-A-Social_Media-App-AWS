@@ -22,15 +22,15 @@ const AdvertWidget = () => {
                 width = "100%"
                 height= "auto"
                 alt="Advert"
-                src="https://friendsvault.s3.us-east-2.amazonaws.com/info4.jpeg"
+                src="https://friendsvault.s3.us-east-2.amazonaws.com/Owner/Ad.png"
                 style={{ borderRadius: "0.75rem", margin: "0.75rem 0"}}
             />
             <FlexBetween>
-                <Typography color={main}> GlowCosmetics</Typography>
-                <Typography color={medium} >glowcosmetics.com</Typography>
+                <Typography color={main}> Turbo-Drive</Typography>
+                <Typography color={medium} >TurboDrive.com</Typography>
             </FlexBetween>
             <Typography color={medium} m="0.5rem 0">
-            Transform your life today with our revolutionary new product—experience the future of innovation now!
+            Drive into the future with the latest high-performance cars! Experience speed, luxury, and innovation like never before.
             </Typography>
         </WidgetWrapper>
     )

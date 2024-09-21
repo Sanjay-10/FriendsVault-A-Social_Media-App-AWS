@@ -21,10 +21,10 @@ function App() {
           <CssBaseline/>
           <Routes>
             <Route path="/" 
-            element= { <LoginPage/> } 
+            element= {  isAuth ? <HomePage/> : <LoginPage/> } 
             />
             <Route path="/about-us" 
-            element= { <AboutUs/> } 
+            element= { isAuth ? <AboutUs/> : <LoginPage/>} 
             />
             <Route path="/home" 
             element= { isAuth ? <HomePage/> : <Navigate to="/"/>  } 
