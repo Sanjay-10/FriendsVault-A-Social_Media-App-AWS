@@ -8,12 +8,26 @@ export const getUser = async (req, res) => {
     const user = await User.findById(id);
     res.status(200).json(user);
     
-
-    
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
+
 };
+
+// READ ALL USER
+export const allUsers = async (req, res) => { 
+  try {
+  const { searchQuery } = req.body;
+  console.log(searchQuery)
+  if (searchQuery === "") return res.status(200).json([])
+  const users = await User.find({ firstName: { $regex: `^${searchQuery}`, $options: 'i' } }).limit(4);
+  res.status(200).json(users);
+  } catch (err){
+    res.status(404).json({ message: err.message });
+  }
+
+};
+
 
 export const getUserFriends = async (req, res) => {
   try {

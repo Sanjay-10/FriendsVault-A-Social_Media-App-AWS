@@ -1,6 +1,7 @@
 import express from "express";
 import {
     getUser,
+    allUsers,
     getUserFriends,
     addRemoveFriend,
 } from "../controllers/users.js"
@@ -14,6 +15,8 @@ router.get("/:id/friends", verifyToken, getUserFriends);
 
 //UPDATE
 router.patch("/:id/:friendId", verifyToken, addRemoveFriend);
+
+router.post("/all/search", allUsers)
 
 
 
