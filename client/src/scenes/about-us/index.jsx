@@ -30,14 +30,16 @@ function Info() {
           justifyContent="center"
           alignItems="center"
           gap="2rem"
-          mt={isNonMobileScreens ? 0 : "2rem"}
           flexBasis={isNonMobileScreens ? "40%" : "100%"}
         >
         
           <Avatar
             alt="Creator"
             src="https://friendsvault.s3.us-east-2.amazonaws.com/Owner/Sanjay_1.jpg" 
-            sx={{ width: isNonMobileScreens ? 220 : 150, height: isNonMobileScreens ? 220 : 150 }}
+            sx={{ width: isNonMobileScreens ? 220 : 150, height: isNonMobileScreens ? 220 : 150, 
+              marginBottom: isNonMobileScreens ? 0 : 3
+            }}
+            
           />
         </Box>
 
@@ -77,7 +79,7 @@ function Info() {
         textAlign={isNonMobileScreens ? "left" : "center"}
       >
         <Box flexBasis={isNonMobileScreens ? "50%" : "100%"} mb={isNonMobileScreens ? 0 : "2rem"}>
-          <Typography variant="h4" fontWeight="bold" gutterBottom>
+          <Typography variant="h4" fontWeight="bold" gutterBottom marginBottom="1rem" > 
             About FriendsVault
           </Typography>
           <Typography variant="body1" color="textSecondary">
