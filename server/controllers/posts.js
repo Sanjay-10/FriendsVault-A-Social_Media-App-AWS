@@ -53,6 +53,7 @@ export const createPost = async (req, res) => {
   }
 };
 
+
 // READ
 export const getFeedPosts = async (req, res) => {
   try {
@@ -62,6 +63,7 @@ export const getFeedPosts = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
 
 export const getUserPosts = async (req, res) => {
   try {

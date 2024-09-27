@@ -290,7 +290,10 @@ const Form = () => {
                         <TextField
                             label="Email"
                             onBlur={handleBlur}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                                e.target.value = e.target.value.toLowerCase();
+                                handleChange(e);
+                            }}
                             value={values.email}
                             name="email"
                             error={Boolean(touched.email) && Boolean(errors.email)}
