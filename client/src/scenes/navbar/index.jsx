@@ -52,7 +52,7 @@ const Navbar = () => {
 
   const getUsers = async () => {
     if (searchQuery !== "") {
-      const response = await fetch(`http://localhost:3001/users/all/search`, {
+      const response = await fetch(`http://3.132.138.14:3001/users/all/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

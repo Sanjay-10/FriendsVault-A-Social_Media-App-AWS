@@ -74,7 +74,7 @@ const Form = () => {
 
         try {
             const savedUserResponse = await fetch(
-                "http://localhost:3001/auth/register",
+                "http://3.132.138.14:3001/auth/register",
                 {
                     method: "POST",
                     body: formData,
@@ -107,7 +107,7 @@ const Form = () => {
         setLoading(true);
         try {
             const loggedInResponse = await fetch(
-                "http://localhost:3001/auth/login",
+                "http://3.132.138.14:3001/auth/login",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
