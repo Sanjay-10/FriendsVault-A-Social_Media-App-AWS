@@ -9,11 +9,15 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
 import { SpeedInsights } from "@vercel/speed-insights/react" 
+import { inject } from '@vercel/analytics';
+
 
 function App() {
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const isAuth = Boolean(useSelector((state) => state.token));
+
+  inject();
 
   return (
     <div className="app">
