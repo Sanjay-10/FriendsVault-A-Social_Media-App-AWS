@@ -22,7 +22,7 @@ import {
     const main = palette.neutral.main;
   
     const getUser = async () => {
-      const response = await fetch(`http://3.132.138.14:3001/users/${userId}`, {
+      const response = await fetch(`http://3.136.250.119:3001/users/${userId}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
