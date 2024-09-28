@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -35,6 +36,7 @@ function App() {
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
+          <SpeedInsights />
     </div>
   );
 }
