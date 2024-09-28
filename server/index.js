@@ -15,15 +15,11 @@ import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 
-import aws from 'aws-sdk';
-import multerS3 from 'multer-s3';
 import { S3Client } from "@aws-sdk/client-s3";
 
 
 //CONFIGURATIONS
 dotenv.config();
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
@@ -46,19 +42,6 @@ export const s3 = new S3Client({
   },
   region: bucketRegion,
 });
-// app.use("/assets", express.static(path.join(__dirname,'public/assets')));
-
-//FILE STORAGE
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb){
-//         cb(null, "public/assets");
-//     },
-//     filename: function(req, file, cb){
-//         cb(null, file.originalname);
-//     }
-// });
-
-// const upload = multer({storage});
 
 const storage = multer.memoryStorage()
 const upload = multer ( { storage: storage})
@@ -76,8 +59,6 @@ app.use("/posts", postRoutes);
 const PORT = process.env.PORT || 3001;
 mongoose
     .connect(process.env.MONGO_URL,{
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
     })
     .then(()=>{
         app.listen(PORT,()=> console.log(`Server Port: ${PORT} is running perfectly` ));
