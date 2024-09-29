@@ -18,7 +18,6 @@ export const getUser = async (req, res) => {
 export const allUsers = async (req, res) => { 
   try {
   const { searchQuery } = req.body;
-  console.log(searchQuery)
   if (searchQuery === "") return res.status(200).json([])
   const users = await User.find({ firstName: { $regex: `^${searchQuery}`, $options: 'i' } }).limit(4);
   res.status(200).json(users);
