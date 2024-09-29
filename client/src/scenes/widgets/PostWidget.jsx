@@ -38,7 +38,7 @@ const PostWidget = ({
   const primary = palette.primary.main;
 
   const patchLike = async () => {
-    const response = await fetch(`https://3.136.250.119:3001/posts/${postId}/like`, {
+    const response = await fetch(`https://friendsvault.online/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -61,7 +61,7 @@ const PostWidget = ({
 
   const handleCommentSubmit = async () => {
     try {
-      const response = await fetch(`https://3.136.250.119:3001/posts/${postId}/comment`, {
+      const response = await fetch(`https://friendsvault.online/posts/${postId}/comment`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -84,7 +84,7 @@ const PostWidget = ({
 
   const handleConfirmDelete = async () => {
     try {
-      await fetch(`https://3.136.250.119:3001/posts/${postId}`, {
+      await fetch(`https://friendsvault.online/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
