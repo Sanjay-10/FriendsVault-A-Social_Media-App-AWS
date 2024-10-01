@@ -1,8 +1,12 @@
-# FriendsVault - A Social Media Platform
+# FriendsVault - A Social Media Platform 
+![FriendsVault Logo](https://github.com/user-attachments/assets/d2bb7a83-4438-42d9-9894-c5cab6a17b9e)
 
 Welcome to **FriendsVault**, a dynamic and engaging social media platform where users can share memories through photos, GIFs, and posts. The platform allows users to like and comment on others' content, fostering connections and building communities.
 
 ### 🔗 [Live Demo](https://friendsvault.vercel.app/)
+
+![1](https://github.com/user-attachments/assets/f168559c-fbbe-4c03-873e-e1949eb24a62)
+![2](https://github.com/user-attachments/assets/12213426-ba9d-42d0-b413-15105c12afe4)
 
 ## 🚀 Features
 - **Sign Up / Log In**: Users can create accounts and log in securely using JWT authentication.
