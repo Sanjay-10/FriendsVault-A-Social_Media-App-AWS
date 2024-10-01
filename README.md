@@ -5,8 +5,13 @@ Welcome to **FriendsVault**, a dynamic and engaging social media platform where 
 
 ### 🔗 [Live Demo](https://friendsvault.vercel.app/)
 
-![1](https://github.com/user-attachments/assets/f168559c-fbbe-4c03-873e-e1949eb24a62)
+![image](https://github.com/user-attachments/assets/52977f88-2a9e-4de1-ab94-d25fc4a5852e)
 ![2](https://github.com/user-attachments/assets/12213426-ba9d-42d0-b413-15105c12afe4)
+![1](https://github.com/user-attachments/assets/f168559c-fbbe-4c03-873e-e1949eb24a62)
+![image](https://github.com/user-attachments/assets/84039871-a0f6-41be-97ee-10e2ddc42d43)
+![image](https://github.com/user-attachments/assets/ea7b86fc-6626-4f5a-bc78-adf1e0ec8387)
+
+
 
 ## 🚀 Features
 - **Sign Up / Log In**: Users can create accounts and log in securely using JWT authentication.
