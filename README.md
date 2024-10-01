@@ -88,14 +88,16 @@ To run this project locally, follow these steps:
 ## 📂 Folder Structure
 
 ```bash
-|-- client          # React frontend code
-    |-- public      # Static assets
-    |-- src         # React components and pages
-|-- server          # Node.js/Express backend code
-    |-- controllers # Backend logic and API routes
-    |-- models      # MongoDB models for users and posts
-    |-- routes      # API endpoints
-|-- README.md       # Project documentation
+|-- client              # React frontend code
+    |-- public          # Static assets
+    |-- src             # React components and pages
+|-- server              # Node.js/Express backend code
+    |-- controllers     # Backend logic and API routes
+    |-- middleware      # middleware functions
+    |-- models          # MongoDB models for users and posts
+    |-- public          # Static assets
+    |-- routes          # API endpoints
+|-- README.md           # Project documentation
 ```
 
 ## 📝 Future Enhancements
