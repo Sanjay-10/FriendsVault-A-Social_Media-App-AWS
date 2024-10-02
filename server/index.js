@@ -6,8 +6,6 @@ import dotenv from "dotenv";
 import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
-
-// Import routes and controllers
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
@@ -20,25 +18,26 @@ import { S3Client } from "@aws-sdk/client-s3";
 dotenv.config();
 const app = express();
 
-// CORS Configuration (place before all other middlewares)
+// CORS Configuration
 const corsOptions = {
   origin: 'https://friendsvault.vercel.app', // Your front-end domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
   credentials: true, // Allow cookies or authorization headers
-  optionsSuccessStatus: 200, // Ensures success for legacy browsers
+  optionsSuccessStatus: 200, // Ensure success for legacy browsers
 };
+
+// Apply CORS Middleware
 app.use(cors(corsOptions));
 
 // Middlewares
-app.use(express.json());
+app.use(express.json({ limit: "50mb" })); // Increase the limit for JSON
+app.use(express.urlencoded({ limit: "50mb", extended: true })); // Increase the limit for URL-encoded bodies
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
-app.use(bodyParser.json({ limit: "30mb", extended: true })); // Increase request size limit
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true })); // Increase URL-encoded limit
 
 // S3 Setup (same as before)
-export const bucketName = process.env.AWS_BUCKET_NAME;
+const bucketName = process.env.AWS_BUCKET_NAME;
 const bucketRegion = process.env.AWS_REGION;
 const accessKey = process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
