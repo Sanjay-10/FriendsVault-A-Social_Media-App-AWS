@@ -26,7 +26,7 @@ const registerSchema = yup.object().shape({
     password: yup.string().required("Required").min(5),
     location: yup.string().required("Required"),
     occupation: yup.string().required("Required"),
-    picture: yup.mixed().required("Required"), // picture validation
+    picture: yup.mixed().required("Required"), 
 });
 
 const loginSchema = yup.object().shape({
