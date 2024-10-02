@@ -6,37 +6,38 @@ import dotenv from "dotenv";
 import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
-import path from "path";
-import { fileURLToPath } from "url";
+
+// Import routes and controllers
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
-
 import { S3Client } from "@aws-sdk/client-s3";
 
 // CONFIGURATIONS
 dotenv.config();
-
 const app = express();
+
+// CORS Configuration (place before all other middlewares)
+const corsOptions = {
+  origin: 'https://friendsvault.vercel.app', // Your front-end domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+  credentials: true, // Allow cookies or authorization headers
+  optionsSuccessStatus: 200, // Ensures success for legacy browsers
+};
+app.use(cors(corsOptions));
+
+// Middlewares
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(bodyParser.json({ limit: "30mb", extended: true })); // Increase request size limit
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true })); // Increase URL-encoded limit
 
-// CORS Configuration
-const corsOptions = {
-  origin: 'https://friendsvault.vercel.app', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-  credentials: true, 
-};
-app.use(cors(corsOptions)); 
-
-// S3 Configuration
+// S3 Setup (same as before)
 export const bucketName = process.env.AWS_BUCKET_NAME;
 const bucketRegion = process.env.AWS_REGION;
 const accessKey = process.env.AWS_ACCESS_KEY_ID;
@@ -57,7 +58,7 @@ const upload = multer({ storage: storage });
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
-// ROUTES
+// Standard Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
@@ -71,9 +72,5 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
-
-    // ADD DATA ONE TIME (if needed)
-    // User.insertMany(users);
-    // Post.insertMany(posts);
   })
   .catch((error) => console.log(`${PORT} did not connect: ${error}`));
