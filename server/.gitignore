@@ -25,3 +25,5 @@ git_guidelines
 *.njsproj
 *.sln
 *.sw?
+
+.vercel

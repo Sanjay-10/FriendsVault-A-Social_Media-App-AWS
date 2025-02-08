@@ -13,7 +13,7 @@ import postRoutes from "./routes/posts.js"
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
-
+import serverless from "serverless-http";
 import { S3Client } from "@aws-sdk/client-s3";
 
 
@@ -70,3 +70,5 @@ mongoose
         // Post.insertMany(posts);
     })
     .catch((error)=> console.log(`${PORT} did not connect`));
+
+export const handler = serverless(app);
