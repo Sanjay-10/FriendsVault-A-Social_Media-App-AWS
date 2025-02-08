@@ -42,6 +42,10 @@ export const s3 = new S3Client({
   region: bucketRegion,
 });
 
+app.get("/", (req, res) => {
+  res.send("Server is working");
+});
+
 const storage = multer.memoryStorage()
 const upload = multer ( { storage: storage})
 
