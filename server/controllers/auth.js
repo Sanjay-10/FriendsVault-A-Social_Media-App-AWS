@@ -8,7 +8,9 @@ import {
     GetObjectCommand,
     DeleteObjectsCommand,
   } from "@aws-sdk/client-s3";
+import dotenv from "dotenv";
 
+dotenv.config();
 
 // REGISTER USER
 export const register = async (req, res) => {
@@ -47,7 +49,7 @@ export const register = async (req, res) => {
             lastName,
             email,
             password: passwordHash,
-            picturePath: `https://friendsvault.s3.us-east-2.amazonaws.com/${imageName}`,
+            picturePath: `https://friendsvault-bucket.s3.us-east-2.amazonaws.com/${imageName}`,
             friends,
             location,
             occupation,

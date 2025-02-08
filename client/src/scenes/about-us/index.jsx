@@ -35,7 +35,8 @@ function Info() {
         
           <Avatar
             alt="Creator"
-            src="https://friendsvault.s3.us-east-2.amazonaws.com/Owner/Sanjay_1.jpg" 
+            // src="https://friendsvault.s3.us-east-2.amazonaws.com/Owner/Sanjay_1.jpg" 
+            // src="aws-change" 
             sx={{ width: isNonMobileScreens ? 220 : 150, height: isNonMobileScreens ? 220 : 150, 
               marginBottom: isNonMobileScreens ? 0 : 3
             }}
@@ -89,7 +90,8 @@ function Info() {
 
         <Box flexBasis={isNonMobileScreens ? "50%" : "100%"} textAlign="center">
           <img
-            src="https://friendsvault.s3.us-east-2.amazonaws.com/Owner/FriendsVault_logo_SVG+(2).svg" // Add the correct path for the image
+            // src="https://friendsvault.s3.us-east-2.amazonaws.com/Owner/FriendsVault_logo_SVG+(2).svg" // Add the correct path for the image
+            src="https://friendsvault-bucket.s3.us-east-2.amazonaws.com/Owner/FriendsVault_logo_SVG+(2).svg" // Add the correct path for the image
             alt="Lawn Mower"
             style={{
               width: isNonMobileScreens ? "50%" : "70%",

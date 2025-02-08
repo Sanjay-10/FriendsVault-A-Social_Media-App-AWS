@@ -19,7 +19,7 @@ export const createPost = async (req, res) => {
 
       if (req.file) {
       const postImageName = randomImageName();
-      postImageUrl = `https://friendsvault.s3.us-east-2.amazonaws.com/${postImageName}`
+      postImageUrl = `https://friendsvault-bucket.s3.us-east-2.amazonaws.com/${postImageName}`
       const params = {
         Bucket: bucketName,
         Key: postImageName,

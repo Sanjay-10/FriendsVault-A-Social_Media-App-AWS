@@ -30,6 +30,7 @@ import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 
+
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const Navbar = () => {
 
   const getUsers = async () => {
     if (searchQuery !== "") {
-      const response = await fetch(`https://friendsvault.online/users/all/search`, {
+      const response = await fetch(`http://localhost:3001/users/all/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

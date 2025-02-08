@@ -1,12 +1,11 @@
 import express from "express";
-import bodyParser from "body-parser";
 import mongoose from "mongoose";
-import cors from "cors"
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import cors from "cors"
 import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
-import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/users.js"
@@ -58,8 +57,7 @@ app.use("/posts", postRoutes);
 //MONGOOSE SETUP
 const PORT = process.env.PORT || 3001;
 mongoose
-    .connect(process.env.MONGO_URL,{
-    })
+    .connect(process.env.MONGO_URL)
     .then(()=>{
         app.listen(PORT,()=> console.log(`Server Port: ${PORT} is running perfectly` ));
 

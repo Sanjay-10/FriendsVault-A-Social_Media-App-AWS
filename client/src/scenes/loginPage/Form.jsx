@@ -74,7 +74,7 @@ const Form = () => {
 
         try {
             const savedUserResponse = await fetch(
-                "https://friendsvault.online/auth/register",
+                "http://localhost:3001/auth/register",
                 {
                     method: "POST",
                     body: formData,
@@ -107,7 +107,7 @@ const Form = () => {
         setLoading(true);
         try {
             const loggedInResponse = await fetch(
-                "https://friendsvault.online/auth/login",
+                "http://localhost:3001/auth/login",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -163,8 +163,8 @@ const Form = () => {
         ];
         const file = acceptedFiles[0];
         if (file && validTypes.includes(file.type)) {
-            setFieldValue("picture", file);  // Set the file in Formik
-            setImagePreview(URL.createObjectURL(file));  // Generate image preview
+            setFieldValue("picture", file);  
+            setImagePreview(URL.createObjectURL(file));  
         } else {
             setSnackbarOpen(true);  // Show Snackbar for invalid file type
         }

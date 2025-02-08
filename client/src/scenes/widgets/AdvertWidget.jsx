@@ -22,7 +22,7 @@ const AdvertWidget = () => {
                 width = "100%"
                 height= "auto"
                 alt="Advert"
-                src="https://friendsvault.s3.us-east-2.amazonaws.com/Owner/Ad.png"
+                src="https://friendsvault-bucket.s3.us-east-2.amazonaws.com/Owner/Ad.png"
                 style={{ borderRadius: "0.75rem", margin: "0.75rem 0"}}
             />
             <FlexBetween>
