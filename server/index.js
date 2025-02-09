@@ -58,17 +58,10 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
-//MONGOOSE SETUP
-const PORT = process.env.PORT || 3001;
+// MONGOOSE SETUP
 mongoose
-    .connect(process.env.MONGO_URL)
-    .then(()=>{
-        app.listen(PORT,()=> console.log(`Server Port: ${PORT} is running perfectly` ));
-
-        // ADD DATA ONE TIME
-        // User.insertMany(users);
-        // Post.insertMany(posts);
-    })
-    .catch((error)=> console.log(`${PORT} did not connect`));
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log(`MongoDB connected successfully`))
+  .catch((error) => console.log(`Database connection error: ${error}`));
 
 export const handler = serverless(app);
