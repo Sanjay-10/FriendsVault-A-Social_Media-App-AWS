@@ -71,4 +71,4 @@ mongoose
     })
     .catch((error)=> console.log(`${PORT} did not connect`));
 
-module.exports = app;
+export default app;
