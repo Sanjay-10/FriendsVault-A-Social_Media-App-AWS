@@ -49,7 +49,7 @@ const MyPostWidget = ({ picturePath }) => {
         formData.append("picture", image);
         formData.append("picturePath", image.name);
       }
-      const response = await fetch(`https://skillmatch-server-8c3lsvz6q-sanjay-10s-projects.vercel.app/posts`, {
+      const response = await fetch(`friendsvault-server.vercel.app/posts`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

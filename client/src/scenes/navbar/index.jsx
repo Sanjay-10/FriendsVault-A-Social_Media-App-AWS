@@ -53,7 +53,7 @@ const Navbar = () => {
 
   const getUsers = async () => {
     if (searchQuery !== "") {
-      const response = await fetch(`https://skillmatch-server-8c3lsvz6q-sanjay-10s-projects.vercel.app/users/all/search`, {
+      const response = await fetch(`friendsvault-server.vercel.app/users/all/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

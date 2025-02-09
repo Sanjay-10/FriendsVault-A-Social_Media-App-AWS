@@ -74,7 +74,7 @@ const Form = () => {
 
         try {
             const savedUserResponse = await fetch(
-                "https://skillmatch-server-8c3lsvz6q-sanjay-10s-projects.vercel.app/auth/register",
+                "friendsvault-server.vercel.app/auth/register",
                 {
                     method: "POST",
                     body: formData,
@@ -107,7 +107,7 @@ const Form = () => {
         setLoading(true);
         try {
             const loggedInResponse = await fetch(
-                "https://skillmatch-server-8c3lsvz6q-sanjay-10s-projects.vercel.app/auth/login",
+                "friendsvault-server.vercel.app/auth/login",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

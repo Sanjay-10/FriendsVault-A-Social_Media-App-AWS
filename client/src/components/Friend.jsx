@@ -23,7 +23,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, postUserId, loggedI
 
   const patchFriend = async () => {
     const response = await fetch(
-      `https://skillmatch-server-8c3lsvz6q-sanjay-10s-projects.vercel.app/users/${_id}/${friendId}`,
+      `friendsvault-server.vercel.app/users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {
