@@ -9,7 +9,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     const token = useSelector((state) => state.token );
 
     const getPosts = async () => {
-        const response = await fetch(`http://localhost:3001/posts`, {
+        const response = await fetch(`https://friendsvault-server.vercel.app/posts`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`} 
         });                                                                 
@@ -21,7 +21,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
     const getUserPosts = async () => {
         try{
-            const response = await fetch(`http://localhost:3001/posts/${userId}/posts`, {
+            const response = await fetch(`https://friendsvault-server.vercel.app/posts/${userId}/posts`, {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}`}
             });
