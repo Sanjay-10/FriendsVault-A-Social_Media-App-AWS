@@ -14,7 +14,7 @@ const FriendListWidget = ( {userId} ) => {
 
     const getFriends = async () => {
         const response = await fetch(
-           `friendsvault-server.vercel.app/users/${userId}/friends`,
+           `https://friendsvault-server.vercel.app/users/${userId}/friends`,
            {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`}

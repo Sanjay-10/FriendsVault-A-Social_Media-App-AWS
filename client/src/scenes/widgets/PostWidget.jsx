@@ -38,7 +38,7 @@ const PostWidget = ({
   const primary = palette.primary.main;
 
   const patchLike = async () => {
-    const response = await fetch(`friendsvault-server.vercel.app/posts/${postId}/like`, {
+    const response = await fetch(`https://friendsvault-server.vercel.app/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -61,7 +61,7 @@ const PostWidget = ({
 
   const handleCommentSubmit = async () => {
     try {
-      const response = await fetch(`friendsvault-server.vercel.app/posts/${postId}/comment`, {
+      const response = await fetch(`https://friendsvault-server.vercel.app/posts/${postId}/comment`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -84,7 +84,7 @@ const PostWidget = ({
 
   const handleConfirmDelete = async () => {
     try {
-      await fetch(`friendsvault-server.vercel.app/posts/${postId}`, {
+      await fetch(`https://friendsvault-server.vercel.app/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

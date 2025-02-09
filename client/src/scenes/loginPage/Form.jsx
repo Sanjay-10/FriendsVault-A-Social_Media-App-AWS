@@ -74,7 +74,7 @@ const Form = () => {
 
         try {
             const savedUserResponse = await fetch(
-                "friendsvault-server.vercel.app/auth/register",
+                "https://friendsvault-server.vercel.app/auth/register",
                 {
                     method: "POST",
                     body: formData,
@@ -107,7 +107,7 @@ const Form = () => {
         setLoading(true);
         try {
             const loggedInResponse = await fetch(
-                "friendsvault-server.vercel.app/auth/login",
+                "https://friendsvault-server.vercel.app/auth/login",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

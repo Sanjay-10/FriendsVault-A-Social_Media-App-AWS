@@ -18,7 +18,7 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)")
 
   const getUser = async () => {
-    const response = await fetch(`friendsvault-server.vercel.app/users/${userId}`, {
+    const response = await fetch(`https://friendsvault-server.vercel.app/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}`}
     })
